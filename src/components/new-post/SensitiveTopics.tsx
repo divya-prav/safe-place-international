@@ -17,33 +17,33 @@ const sensitiveTopics = [
   "Suicide or self-harm",
   "Trauma",
   "Violence",
-];
+] as const;
 
-type SensitiveTopicsProps = {
+interface SensitiveTopicsProps {
   isSensitive: boolean;
   setIsSensitive: (isSensitive: boolean) => void;
   selectedTopics: string[];
   setSelectedTopics: (topics: string[]) => void;
-};
+}
 
-const handleTopicToggle = (
-  topic: string,
-  selectedTopics: string[],
-  setSelectedTopics: (topics: string[]) => void
-) => {
-  setSelectedTopics(
-    selectedTopics.includes(topic)
-      ? selectedTopics.filter((t) => t !== topic)
-      : [...selectedTopics, topic]
-  );
-};
-
-export default function SensitiveTopics({
+const SensitiveTopics: React.FC<SensitiveTopicsProps> = ({
   isSensitive,
   setIsSensitive,
   selectedTopics,
-  setSelectedTopics
-}: SensitiveTopicsProps) {
+  setSelectedTopics,
+}) => {
+  const handleTopicToggle = (
+    topic: string,
+    selectedTopics: string[],
+    setSelectedTopics: (topics: string[]) => void
+  ) => {
+    setSelectedTopics(
+      selectedTopics.includes(topic)
+        ? selectedTopics.filter((t) => t !== topic)
+        : [...selectedTopics, topic]
+    );
+  };
+
   return (
     <>
       <section className="flex items-center justify-between">
@@ -66,7 +66,9 @@ export default function SensitiveTopics({
                 <Checkbox
                   id={topic}
                   checked={selectedTopics.includes(topic)}
-                  onCheckedChange={() => handleTopicToggle(topic, selectedTopics, setSelectedTopics)}
+                  onCheckedChange={() =>
+                    handleTopicToggle(topic, selectedTopics, setSelectedTopics)
+                  }
                 />
                 <label htmlFor={topic} className="text-sm font-medium">
                   {topic}
@@ -78,4 +80,6 @@ export default function SensitiveTopics({
       )}
     </>
   );
-}
+};
+
+export default SensitiveTopics;
