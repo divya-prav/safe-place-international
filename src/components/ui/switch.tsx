@@ -17,11 +17,11 @@ const Switch = React.forwardRef<
     {...props}
     ref={ref}
   >
-    <SwitchPrimitives.Thumb
+    {/* <SwitchPrimitives.Thumb
       className={cn(
         "pointer-events-none block h-4 w-4 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-4 data-[state=unchecked]:translate-x-0"
       )}
-    />
+    /> */}
   </SwitchPrimitives.Root>
 ))
 Switch.displayName = SwitchPrimitives.Root.displayName
@@ -37,7 +37,7 @@ const ToggleSwitch = React.forwardRef<
   <div className="flex items-center justify-between">
     {label && <span className="text-lg font-semibold">{label}</span>}
     <div className="relative">
-      <Switch
+    <Switch
         ref={ref}
         className={cn(
           "w-14 h-7 duration-300 ease-in-out transition-all",
@@ -45,7 +45,8 @@ const ToggleSwitch = React.forwardRef<
           className
         )}
         {...props}
-      />
+      >
+      </Switch>
       <div
         className={cn(
           "absolute left-1 top-1 h-5 w-5 rounded-full bg-gray-600 flex items-center justify-center duration-300 ease-in-out transition-opacity pointer-events-none",
